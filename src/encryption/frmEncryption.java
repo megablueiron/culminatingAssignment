@@ -180,6 +180,8 @@ public class frmEncryption extends javax.swing.JFrame {
        String message = txtMessage.getText();
        String messageBinary = strToBinary(message);
        
+       String messageBinaryEncrypted = "";
+       
        int max = 2147483647;
        
        String key = txtKey.getText();
@@ -188,8 +190,17 @@ public class frmEncryption extends javax.swing.JFrame {
        keyBinary = lengthenKey(keyBinary, messageBinary);
        
        for (int i = 0; i<messageBinary.length(); i++){
-           messageBinary.charAt(i) ^ keyBinary.charAt(i);
+        int binValue = messageBinary.charAt(i) ^ keyBinary.charAt(i);
+        
+        if(binValue == 1){
+            messageBinaryEncrypted += "1";
+        } else {
+            messageBinaryEncrypted += "0";
+        }
+        
        }
+       
+       
        
        //Integer [] charValue = [message.length()];
        
