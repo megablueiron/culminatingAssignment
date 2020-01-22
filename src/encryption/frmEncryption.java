@@ -40,7 +40,9 @@ public class frmEncryption extends javax.swing.JFrame {
         lblKeyEntry = new javax.swing.JLabel();
         scrMessage = new javax.swing.JScrollPane();
         txtMessage = new javax.swing.JTextArea();
-        lblEncrypted = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtEncrypted = new javax.swing.JTextArea();
+        lblTip = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,7 +95,12 @@ public class frmEncryption extends javax.swing.JFrame {
         txtMessage.setRows(5);
         scrMessage.setViewportView(txtMessage);
 
-        lblEncrypted.setText("jLabel1");
+        txtEncrypted.setColumns(20);
+        txtEncrypted.setLineWrap(true);
+        txtEncrypted.setRows(5);
+        jScrollPane1.setViewportView(txtEncrypted);
+
+        lblTip.setText("(A number is preferable)");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,23 +125,30 @@ public class frmEncryption extends javax.swing.JFrame {
                             .addComponent(txtKey, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(27, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnEncrypt)
-                        .addGap(221, 221, 221))
+                        .addGap(0, 17, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnToDecryption)
+                                .addGap(40, 40, 40))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblTitle2)
+                                .addGap(103, 103, 103))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(lblTip)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnEncrypt)
+                                .addGap(221, 221, 221))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblEncryptResult, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(scrMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(22, 22, 22))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnToDecryption)
-                        .addGap(40, 40, 40))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTitle2)
-                        .addGap(103, 103, 103))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblEncryptResult, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(scrMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblEncrypted, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22))))
+                        .addComponent(jScrollPane1)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -158,10 +172,12 @@ public class frmEncryption extends javax.swing.JFrame {
                     .addComponent(txtKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblKeyEntry))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEncrypt)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnEncrypt)
+                    .addComponent(lblTip))
                 .addGap(7, 7, 7)
-                .addComponent(lblEncrypted, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
                 .addComponent(btnToDecryption)
                 .addContainerGap())
         );
@@ -171,20 +187,20 @@ public class frmEncryption extends javax.swing.JFrame {
 
     private void btnEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncryptActionPerformed
        
-       
        String message = txtMessage.getText();
        String messageBinary = strToBinary(message);
        
        String messageBinaryEncrypted = "";
        String messageEncrypted = "";
        
-       int max = 2147483647;
-       
        String key = txtKey.getText();
        String keyBinary = strToBinary(message);
        
        keyBinary = lengthenKey(keyBinary, messageBinary);
        
+       messageEncrypted = convert(message, key);
+       
+       /*
        for (int i = 0; i<messageBinary.length(); i++){
         int binValue = messageBinary.charAt(i) ^ keyBinary.charAt(i);
         lblEncrypted.setText(binValue + "");
@@ -193,11 +209,11 @@ public class frmEncryption extends javax.swing.JFrame {
         } else {
             messageBinaryEncrypted += "0";
         }
-        
        }
+       */
         
         //lblEncrypted.setText(messageBinaryEncrypted);
-
+        /*
         for(int index = 0; index < messageBinaryEncrypted.length(); index+=7) {
             String temp = messageBinaryEncrypted.substring(index, index+7);
             int num = Integer.parseInt(temp,2);
@@ -205,10 +221,10 @@ public class frmEncryption extends javax.swing.JFrame {
             messageEncrypted += letter;
             //messageEncrypted = messageEncrypted + letter;
         }
-        //lblEncrypted.setText("");
-        
-       //Integer [] charValue = [message.length()];
+       */
        
+        txtEncrypted.setText(messageEncrypted + "");
+               
     }//GEN-LAST:event_btnEncryptActionPerformed
 
     private void btnToDecryptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToDecryptionActionPerformed
@@ -221,10 +237,10 @@ public class frmEncryption extends javax.swing.JFrame {
     }//GEN-LAST:event_txtKeyActionPerformed
 
     private void btnGenerateKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateKeyActionPerformed
-        int ALPHABET_SIZE = 25;
-        int KEY_SIZE = 9;
+       final int MAX = 899999999;
+       final int MIN = 100000000;
         
-        randomKeyGenerator(ALPHABET_SIZE, KEY_SIZE);
+        randomKeyGenerator(MIN, MAX);
     }//GEN-LAST:event_btnGenerateKeyActionPerformed
 
     /**
@@ -277,6 +293,16 @@ public class frmEncryption extends javax.swing.JFrame {
         return String.valueOf(a); 
     } 
     
+    public String convert(String message, String key){
+        StringBuilder sb = new StringBuilder();
+        String result = "";
+        for(int i = 0; i < message.length(); i++){
+        sb.append((char)(message.charAt(i) ^ key.charAt(i % key.length())));
+        result = sb.toString();
+        }
+        return(result);
+    }
+    
     public String strToBinary(String message) 
     { 
         int length = message.length(); 
@@ -315,7 +341,10 @@ public class frmEncryption extends javax.swing.JFrame {
     }
     
     public void randomKeyGenerator(int n1, int n2) {
-        
+             
+        int randomNumber = (int)Math.round(Math.random()*n2+n1);
+        lblKeyInstructions.setText(String.valueOf(randomNumber));
+        /*
         String randomKey = "";      
         
         for (int i = 0; i<n2; i++) {
@@ -323,22 +352,23 @@ public class frmEncryption extends javax.swing.JFrame {
         randomKey += Character.toString((char)randomNumber);
         lblKeyInstructions.setText(randomKey);
         }
-        
-        //return(randomNumber);
+        */
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEncrypt;
     private javax.swing.JButton btnGenerateKey;
     private javax.swing.JButton btnToDecryption;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEncryptResult;
-    private javax.swing.JLabel lblEncrypted;
     private javax.swing.JLabel lblInstructionEncrypt;
     private javax.swing.JLabel lblKeyEntry;
     private javax.swing.JLabel lblKeyInstructions;
+    private javax.swing.JLabel lblTip;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTitle2;
     private javax.swing.JScrollPane scrMessage;
+    private javax.swing.JTextArea txtEncrypted;
     private javax.swing.JTextField txtKey;
     private javax.swing.JTextArea txtMessage;
     // End of variables declaration//GEN-END:variables
