@@ -202,35 +202,16 @@ public class frmEncryption extends javax.swing.JFrame {
        //keyBinary = lengthenKey(keyBinary, messageBinary);
        
        //convert the message using the key using the convert method
-       convert(message, key);
+       messageEncrypted = convert(message, key);
        
-       /*
-       for (int i = 0; i<messageBinary.length(); i++){
-        int binValue = messageBinary.charAt(i) ^ keyBinary.charAt(i);
-        lblEncrypted.setText(binValue + "");
-        if(binValue == 1){
-            messageBinaryEncrypted += "1";
-        } else {
-            messageBinaryEncrypted += "0";
-        }
-       }
-       */
-        
-        /*
-        for(int index = 0; index < messageBinaryEncrypted.length(); index+=7) {
-            String temp = messageBinaryEncrypted.substring(index, index+7);
-            int num = Integer.parseInt(temp,2);
-            char letter = (char) num;
-            messageEncrypted += letter;
-            //messageEncrypted = messageEncrypted + letter;
-        }
-       */
-       
-        txtEncrypted.setText(messageEncrypted);
+       //display the encryted message to the output section
+       txtEncrypted.setText(messageEncrypted);
                
     }//GEN-LAST:event_btnEncryptActionPerformed
 
     private void btnToDecryptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToDecryptionActionPerformed
+        
+        //if you click the "to decryption" button, switch the frame from the encryption to decryption
         this.setVisible(false);
         new frmDecryption().setVisible(true);
     }//GEN-LAST:event_btnToDecryptionActionPerformed
@@ -241,10 +222,12 @@ public class frmEncryption extends javax.swing.JFrame {
 
     private void btnGenerateKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateKeyActionPerformed
        
+       //set the max and min value that the random number generator can produce
        final int MAX = 899999999;
        final int MIN = 100000000;
-        
-        randomKeyGenerator(MIN, MAX);
+       
+       //call a method that randomly generates a number between the min and max number
+       randomKeyGenerator(MIN, MAX);
     }//GEN-LAST:event_btnGenerateKeyActionPerformed
 
     /**
@@ -297,7 +280,7 @@ public class frmEncryption extends javax.swing.JFrame {
         return String.valueOf(a); 
     } 
     
-    public void convert(String message, String key)
+    public String convert(String message, String key)
     {
         StringBuilder sb = new StringBuilder();
         String result = "";
@@ -307,7 +290,34 @@ public class frmEncryption extends javax.swing.JFrame {
             sb.append((char)(message.charAt(i) ^ key.charAt(i % key.length())));
             result = sb.toString();
         }
-        txtEncrypted.setText(result);
+        return(result);
+    }
+    
+    public String xorEncrypt(String message, String key, String output){
+        
+        for (int i = 0; i<message.length(); i++){
+        int binValue = message.charAt(i) ^ key.charAt(i);
+        
+        if(binValue == 1){
+                output += "1";
+            } else {
+                output += "0";
+            }
+       }
+        return(output);
+    }
+    
+    public String binaryToString(String messageBinaryEncrypted, String output){
+        
+        for(int index = 0; index < messageBinaryEncrypted.length(); index+=7) {
+            
+            String temp = messageBinaryEncrypted.substring(index, index+7);
+            int num = Integer.parseInt(temp,2);
+            char letter = (char) num;
+            output += letter;
+            
+        }
+    return(output);
     }
     
     public String strToBinary(String message) 
