@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Michael Botros
+ * January 28th, 2020
+ * This program allows any user to encrypt a message using a key with an XOR encryption method. The software also has a decryption menu where the user can decrypt an encrypted message if they have the key
  */
 
 package encryption;
@@ -187,18 +187,22 @@ public class frmEncryption extends javax.swing.JFrame {
 
     private void btnEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncryptActionPerformed
        
+        //Grab the users message as a string
        String message = txtMessage.getText();
-       String messageBinary = strToBinary(message);
+       //String messageBinary = strToBinary(message);
        
-       String messageBinaryEncrypted = "";
+       //String messageBinaryEncrypted = "";
+       //declaring end message string
        String messageEncrypted = "";
        
+       //Grab the key from the user as a string
        String key = txtKey.getText();
-       String keyBinary = strToBinary(message);
+       //String keyBinary = strToBinary(message);
        
-       keyBinary = lengthenKey(keyBinary, messageBinary);
+       //keyBinary = lengthenKey(keyBinary, messageBinary);
        
-       messageEncrypted = convert(message, key);
+       //convert the message using the key using the convert method
+       convert(message, key);
        
        /*
        for (int i = 0; i<messageBinary.length(); i++){
@@ -212,7 +216,6 @@ public class frmEncryption extends javax.swing.JFrame {
        }
        */
         
-        //lblEncrypted.setText(messageBinaryEncrypted);
         /*
         for(int index = 0; index < messageBinaryEncrypted.length(); index+=7) {
             String temp = messageBinaryEncrypted.substring(index, index+7);
@@ -223,7 +226,7 @@ public class frmEncryption extends javax.swing.JFrame {
         }
        */
        
-        txtEncrypted.setText(messageEncrypted + "");
+        txtEncrypted.setText(messageEncrypted);
                
     }//GEN-LAST:event_btnEncryptActionPerformed
 
@@ -237,6 +240,7 @@ public class frmEncryption extends javax.swing.JFrame {
     }//GEN-LAST:event_txtKeyActionPerformed
 
     private void btnGenerateKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateKeyActionPerformed
+       
        final int MAX = 899999999;
        final int MIN = 100000000;
         
@@ -293,28 +297,30 @@ public class frmEncryption extends javax.swing.JFrame {
         return String.valueOf(a); 
     } 
     
-    public String convert(String message, String key){
+    public void convert(String message, String key)
+    {
         StringBuilder sb = new StringBuilder();
         String result = "";
-        for(int i = 0; i < message.length(); i++){
-        sb.append((char)(message.charAt(i) ^ key.charAt(i % key.length())));
-        result = sb.toString();
+        
+        for(int i = 0; i < message.length(); i++)
+        {
+            sb.append((char)(message.charAt(i) ^ key.charAt(i % key.length())));
+            result = sb.toString();
         }
-        return(result);
+        txtEncrypted.setText(result);
     }
     
     public String strToBinary(String message) 
     { 
         int length = message.length(); 
         String binary = "";
+        
         for (int i = 0; i < length; i++)  
         { 
-            // convert each char to 
-            // ASCII value 
+            // converting each char to an ASCII value 
             int value = Integer.valueOf(message.charAt(i)); 
   
-            // Convert ASCII value to binary 
- 
+            // Converting ASCII value to binary by modulus dividing by 2 and checking the remainder to determine the value of the bit, then dividing by two until you get to 0. The result is the reverse binary string of the value
             while (value > 0)  
             { 
                 if (value % 2 == 1)
@@ -333,7 +339,8 @@ public class frmEncryption extends javax.swing.JFrame {
     
     public String lengthenKey(String key, String message){
         
-        for(int i = 0; i>=((message.length()/key.length())+1); i++){
+        for(int i = 0; i>=((message.length()/key.length())+1); i++)
+        {
             String temporary = key;
             key = temporary + key;
         }
