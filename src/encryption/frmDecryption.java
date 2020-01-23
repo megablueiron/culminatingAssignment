@@ -209,7 +209,12 @@ public class frmDecryption extends javax.swing.JFrame {
             }
         });
     }
-
+/**
+ * 
+ * @param message -
+ * @param key - 
+ * @return - 
+ */
     public String convert(String message, String key){
         StringBuilder sb = new StringBuilder();
         String result = "";
