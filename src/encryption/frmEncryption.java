@@ -264,11 +264,14 @@ public class frmEncryption extends javax.swing.JFrame {
             }
         });
     }
+    
     static String reverse(String input)  
     { 
-        char[] a = input.toCharArray(); 
-        int l, r = 0; 
-        r = a.length - 1; 
+        //create
+        char[] string = input.toCharArray(); 
+        int l = 0;
+        int r = 0; 
+        r = string.length - 1; 
   
         for (l = 0; l < r; l++, r--) 
         { 
