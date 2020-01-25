@@ -265,53 +265,85 @@ public class frmEncryption extends javax.swing.JFrame {
         });
     }
     
+    /**
+     * 
+     * @param input - this parameter takes any string
+     * @return - the reversed string
+     */
     static String reverse(String input)  
     { 
-        //create
+        //create a string and a variable for the first and last character of the string
         char[] string = input.toCharArray(); 
-        int l = 0;
-        int r = 0; 
-        r = string.length - 1; 
+        int first = 0;
+        int last = 0; 
+        last = string.length - 1; 
   
-        for (l = 0; l < r; l++, r--) 
+        //this for loop counts up from the start of the string and down from the end and replaces the ends until it reaches the middle where then the string is reversed
+        for (first = 0; first < last; first++, last--) 
         { 
-            // Swap values of l and r  
-            char temp = a[l]; 
-            a[l] = a[r]; 
-            a[r] = temp; 
+            // Swap values of first and last  
+            char temp = string[first]; 
+            string[first] = string[last]; 
+            string[last] = temp; 
         } 
-        return String.valueOf(a); 
+        //returning the value of the string
+        return String.valueOf(string); 
     } 
     
+    /**
+     * 
+     * @param message - the message that needs to be XOR encrypted in the form of a string
+     * @param key - the that the message is encrypted with in the form of a string
+     * @return - the XOR encrypted message in the form of a string
+     */
     public String convert(String message, String key)
     {
+        //build a new string for the end encrypted string
         StringBuilder sb = new StringBuilder();
         String result = "";
         
+        //this for loop will xor the first characters of the string and key and add it to the result string and will repeat for every character of the message
         for(int i = 0; i < message.length(); i++)
         {
             sb.append((char)(message.charAt(i) ^ key.charAt(i % key.length())));
             result = sb.toString();
         }
+        //the method then returns the encrypted string
         return(result);
     }
     
-    public String xorEncrypt(String message, String key, String output){
+    /**
+     * 
+     * @param message - the message that needs to be encrypted in the form of a string
+     * @param key - the key that will be used to encrypt the message in the form of a string
+     * @return - the encrypted message as a string of 1's and 0's
+     */
+    public String xorEncrypt(String message, String key){
         
+        //this for loop will xor the values of the characters of the key and message assuming that they are binary. It will then take the resulting value and add a 1 or 0 to the ecnrypted binary string
+        String output = "";
         for (int i = 0; i<message.length(); i++){
-        int binValue = message.charAt(i) ^ key.charAt(i);
+            int binValue = message.charAt(i) ^ key.charAt(i);
         
-        if(binValue == 1){
+            if(binValue == 1){
                 output += "1";
             } else {
                 output += "0";
             }
        }
+        //return the encrypted binary string
         return(output);
     }
     
-    public String binaryToString(String messageBinaryEncrypted, String output){
+    /**
+     * 
+     * @param messageBinaryEncrypted - takes in a string of 1's and 0's
+     * @return - a string of characters
+     */
+    public String binaryToString(String messageBinaryEncrypted){
         
+        //this for loop splits a binary string into 8 bits and takes the value of the byte and then converts the ascii number into a char and adds it to a string
+        String output = "";
         for(int index = 0; index < messageBinaryEncrypted.length(); index+=7) {
             
             String temp = messageBinaryEncrypted.substring(index, index+7);
@@ -320,11 +352,18 @@ public class frmEncryption extends javax.swing.JFrame {
             output += letter;
             
         }
+    //returns the binary string in characters
     return(output);
     }
     
+    /**
+     * 
+     * @param message - a string of characters
+     * @return - a string of 1's and 0's
+     */
     public String strToBinary(String message) 
-    { 
+    {
+        //declaring all variables
         int length = message.length(); 
         String binary = "";
         
@@ -350,20 +389,36 @@ public class frmEncryption extends javax.swing.JFrame {
         return(binary);
     }
     
+    /**
+     * 
+     * @param key - a key to lengthen in the form of a string of characters
+     * @param message - a message to determine the length of the key in the form of a string of characters
+     * @return - the lengthened key in the form of a string of characters
+     */
     public String lengthenKey(String key, String message){
         
+        //this loop lengthens the key by seeing how many times the key goes into the message and adds it that many times plus 1 to be sure
         for(int i = 0; i>=((message.length()/key.length())+1); i++)
         {
             String temporary = key;
             key = temporary + key;
         }
+        //returns the lengthened key
         return(key);
     }
     
+    /**
+     * 
+     * @param n1 - the minimum value that can be generated
+     * @param n2 - the maximum value that can be generated
+     */
     public void randomKeyGenerator(int n1, int n2) {
-             
+        
+        //randomly generates a number between 100000000 and 999999999 and display it on the GUI
         int randomNumber = (int)Math.round(Math.random()*n2+n1);
         lblKeyInstructions.setText(String.valueOf(randomNumber));
+        
+        //this old version of the method would do the same thing but would generate the ascii values of the alphabet and randomly output those
         /*
         String randomKey = "";      
         
