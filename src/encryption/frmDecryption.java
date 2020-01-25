@@ -32,13 +32,14 @@ public class frmDecryption extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         lblTitle2 = new javax.swing.JLabel();
         lblInstructionDecrypt = new javax.swing.JLabel();
-        txtDecrypt = new javax.swing.JTextField();
         btnDecrypt = new javax.swing.JButton();
         btnToEncryption = new javax.swing.JButton();
         txtKey = new javax.swing.JTextField();
         lblKey = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtMessage = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDecrypt = new javax.swing.JTextArea();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -52,13 +53,6 @@ public class frmDecryption extends javax.swing.JFrame {
 
         lblInstructionDecrypt.setFont(new java.awt.Font("Ti73pc", 0, 11)); // NOI18N
         lblInstructionDecrypt.setText("Enter a encrypted message to decrypt it");
-
-        txtDecrypt.setFont(new java.awt.Font("Ti73pc", 0, 11)); // NOI18N
-        txtDecrypt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDecryptActionPerformed(evt);
-            }
-        });
 
         btnDecrypt.setFont(new java.awt.Font("Ti83pc", 0, 11)); // NOI18N
         btnDecrypt.setForeground(new java.awt.Color(204, 0, 0));
@@ -85,13 +79,31 @@ public class frmDecryption extends javax.swing.JFrame {
         lblKey.setText("Enter key here:");
 
         txtMessage.setColumns(20);
+        txtMessage.setLineWrap(true);
         txtMessage.setRows(5);
         jScrollPane1.setViewportView(txtMessage);
+
+        txtDecrypt.setColumns(20);
+        txtDecrypt.setLineWrap(true);
+        txtDecrypt.setRows(5);
+        jScrollPane2.setViewportView(txtDecrypt);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(lblTitle2)
+                        .addGap(103, 103, 103))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnToEncryption)
+                        .addGap(46, 46, 46))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -106,22 +118,11 @@ public class frmDecryption extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnDecrypt)
-                            .addComponent(txtKey, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblTitle2)
-                        .addGap(103, 103, 103))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btnToEncryption)
-                        .addGap(46, 46, 46))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDecrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22))))
+                            .addComponent(txtKey, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2)))
+                .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,9 +133,9 @@ public class frmDecryption extends javax.swing.JFrame {
                 .addComponent(lblTitle2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lblInstructionDecrypt)
+                .addGap(5, 5, 5)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(txtDecrypt, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblKey))
@@ -150,23 +151,23 @@ public class frmDecryption extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtDecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDecryptActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtDecryptActionPerformed
-
     private void btnDecryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDecryptActionPerformed
         
+        //declaring all variables
         String message = txtDecrypt.getText();
         String key = txtKey.getText();
         
         String messageEncrypted = "";
         
+        //converting the encrypted message back to normal
         messageEncrypted = convert(message, key);
         
+        //outputting the message to the GUI
         txtMessage.setText(messageEncrypted);
     }//GEN-LAST:event_btnDecryptActionPerformed
 
     private void btnToEncryptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToEncryptionActionPerformed
+        //if the user clicks the "To encryption" button, this frame will be hidden and replaced with the encryption frame
         this.setVisible(false);
         new frmEncryption().setVisible(true);
     }//GEN-LAST:event_btnToEncryptionActionPerformed
@@ -209,19 +210,25 @@ public class frmDecryption extends javax.swing.JFrame {
             }
         });
     }
-/**
- * 
- * @param message -
- * @param key - 
- * @return - 
- */
-    public String convert(String message, String key){
+    /**
+     * 
+     * @param message - the message that needs to be XOR encrypted in the form of a string
+     * @param key - the that the message is encrypted with in the form of a string
+     * @return - the XOR encrypted message in the form of a string
+     */
+    public String convert(String message, String key)
+    {
+        //build a new string for the end encrypted string
         StringBuilder sb = new StringBuilder();
         String result = "";
-        for(int i = 0; i < message.length(); i++){
-        sb.append((char)(message.charAt(i) ^ key.charAt(i % key.length())));
-        result = sb.toString();
+        
+        //this for loop will xor the first characters of the string and key and add it to the result string and will repeat for every character of the message
+        for(int i = 0; i < message.length(); i++)
+        {
+            sb.append((char)(message.charAt(i) ^ key.charAt(i % key.length())));
+            result = sb.toString();
         }
+        //the method then returns the encrypted string
         return(result);
     }
     
@@ -229,12 +236,13 @@ public class frmDecryption extends javax.swing.JFrame {
     private javax.swing.JButton btnDecrypt;
     private javax.swing.JButton btnToEncryption;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JLabel lblInstructionDecrypt;
     private javax.swing.JLabel lblKey;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblTitle2;
-    private javax.swing.JTextField txtDecrypt;
+    private javax.swing.JTextArea txtDecrypt;
     private javax.swing.JTextField txtKey;
     private javax.swing.JTextArea txtMessage;
     // End of variables declaration//GEN-END:variables
