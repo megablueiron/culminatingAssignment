@@ -155,7 +155,7 @@ public class frmDecryption extends javax.swing.JFrame {
         
         //declaring all variables
         String message = txtDecrypt.getText();
-        String key = txtKey.getText();
+        String key = txtKey.getText()+"1";
         
         String messageEncrypted = "";
         
