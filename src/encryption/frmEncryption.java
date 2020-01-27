@@ -187,25 +187,31 @@ public class frmEncryption extends javax.swing.JFrame {
 
     private void btnEncryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEncryptActionPerformed
        
-        //Grab the users message as a string
-       String message = txtMessage.getText();
-       //String messageBinary = strToBinary(message);
+    //Grab the users message as a string
+    String message = txtMessage.getText();
+    //String messageBinary = strToBinary(message);
        
-       //String messageBinaryEncrypted = "";
-       //declaring end message string
-       String messageEncrypted = "";
+    //String messageBinaryEncrypted = "";
+    //declaring end message string
+    String messageEncrypted = "";
        
-       //Grab the key from the user as a string
-       String key = txtKey.getText();
-       //String keyBinary = strToBinary(message);
+    //Grab the key from the user as a string
+    String key = txtKey.getText()+"1";
+    //String keyBinary = strToBinary(message);
        
-       //keyBinary = lengthenKey(keyBinary, messageBinary);
+    //trying to catch an error where there is no key and a division occurs with the key length when the key lenght value is 0
+    try {
+    //convert the message using the key using the convert method
+    messageEncrypted = convert(message, key);
+    }
        
-       //convert the message using the key using the convert method
-       messageEncrypted = convert(message, key);
+    catch (NumberFormatException e)
+    {
+    txtEncrypted.setText("Please enter a real input");
+    }
        
-       //display the encryted message to the output section
-       txtEncrypted.setText(messageEncrypted);
+    //display the encryted message to the output section
+    txtEncrypted.setText(messageEncrypted);
                
     }//GEN-LAST:event_btnEncryptActionPerformed
 
@@ -397,8 +403,8 @@ public class frmEncryption extends javax.swing.JFrame {
      */
     public String lengthenKey(String key, String message){
         
-        //this loop lengthens the key by seeing how many times the key goes into the message and adds it that many times plus 1 to be sure
-        for(int i = 0; i>=((message.length()/key.length())+1); i++)
+        //this loop lengthens the key by seeing how many times the key (+1 so that if there is no key there is no crash) goes into the message and adds it that many times plus 1 to be sure
+        for(int i = 0; i>=((message.length()/key.length()+1)); i++)
         {
             String temporary = key;
             key = temporary + key;
